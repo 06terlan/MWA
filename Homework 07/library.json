@@ -1,0 +1,13 @@
+Student = {
+	"name": "",
+	"course": ""
+};
+
+Book = {
+	"_id": "",
+	"name": "",
+	"ISBN": "",
+	"authors": [{"name": ""}, {"name": ""}],
+	"keyWords": ["", ""],
+	"borrowed": [{"student": "", "returnDate": ""}, {"student": "", "returnDate": ""}]
+};
