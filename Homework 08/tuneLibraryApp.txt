@@ -1,0 +1,21 @@
+Student = {
+	"name": "",
+	"course": ""
+};
+
+Book = {
+	"_id": "",
+	"name": "",
+	"ISBN": "",
+	"authors": [{"name": ""}, {"name": ""}],
+	"keyWords": ["", ""],
+	"borrowed": [{"student": "", "returnDate": ""}, {"student": "", "returnDate": ""}]
+};
+
+
+we need indexes for tuning up our application.
+1. ISBN
+2. name
+3. keyWords
+
+We need these tree index for searching the data.
