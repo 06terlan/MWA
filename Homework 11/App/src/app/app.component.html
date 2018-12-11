@@ -1,1 +1,5 @@
-<counter counterValue="5"></counter>
+<div>
+	<counter counterValue="5" (counterChange)="counterChange($event)"></counter>
+	<br/>
+	Component Counter Value = {{ComponentCounterValue}}
+</div>
