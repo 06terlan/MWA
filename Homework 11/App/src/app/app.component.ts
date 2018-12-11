@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'App';
+	ComponentCounterValue:number = 0;
+  	
+  	counterChange(e){
+  		this.ComponentCounterValue = e;
+  	}
 }
