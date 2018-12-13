@@ -3,23 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Routes, RouterModule } from '@angular/router'
-import { UsersComponent } from './users.component'
+import { Routes, RouterModule } from '@angular/router';
+import { UserModule } from './user/user.module';
 
 
-const MY_ROUTES:Routes = [
-  {path: 'users', component: UsersComponent}
+const ROUTES : Routes = [
+  { path: 'users', loadChildren: './user/user.module#UserModule' }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    UsersComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot(MY_ROUTES)
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: '',
-	template: 'sadasd',
+	template: `
+		Page Not found
+	`,
 	styles: []
 })
-export class UsersComponent{
+export class NotFoundComponent{
 	
 }
