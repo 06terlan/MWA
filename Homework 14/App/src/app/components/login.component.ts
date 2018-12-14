@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 
+
 @Component({
 	selector: '',
-	template: `
-		Page Not found
-	`,
+	template: 'dashboard',
 	styles: []
 })
-export class NotFoundComponent{
+export class LoginComponent{
 	
 }
