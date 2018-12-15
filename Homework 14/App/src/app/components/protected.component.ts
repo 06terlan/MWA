@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 	template: 'dashboard',
 	styles: []
 })
-export class DashboardComponent{
+export class ProtectedComponent{
 	
 }

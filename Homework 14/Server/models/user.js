@@ -7,4 +7,6 @@ const userSchema = new Schema({
 	lastName: String
 });
 
+userSchema.index({email: 1, unique: true});
+
 module.exports = model('user', userSchema, 'users');

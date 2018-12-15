@@ -3,10 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 var apiRouter = require('./routes/api');
 
 var app = express();
+mongoose.set('useCreateIndex', true)
 const PORT = 4000;
 let db;
 
@@ -35,6 +37,7 @@ app.use((req, res, next)=>{
 		});
 	}
 });
+app.use(cors());
 
 app.use('/api', apiRouter);
 
