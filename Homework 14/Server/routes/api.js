@@ -3,6 +3,9 @@ var router = express.Router();
 const User = require('../models/user');
 const { body, validationResult } = require('express-validator/check');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { verifyToken } = require('../middlewares/auth');
+const mongoose = require('mongoose');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -19,7 +22,9 @@ router.post('/register',
 				req.body.password = hash;
 			    const newUser = new User(req.body);
 				newUser.save((error, user)=>{
-					res.status(201).json({status:'Success', data: newUser});
+					const payload = {subject: user._id};
+					const token = jwt.sign(payload, 'secret');
+					res.status(201).json({status:'Success', token: token});
 				});
 			});
 		}
@@ -39,7 +44,9 @@ router.post('/login',
 
 					bcrypt.compare(req.body.password, user.password).then((hRes)=>{
 						if(hRes){
-							res.status(200).json({status:'Success', data: user});
+							const payload = {subject: user._id};
+							const token = jwt.sign(payload, 'secret');
+							res.status(200).json({status:'Success', token: token});
 						}
 						else{
 							res.status(401).json({status:'Error', error: 'Password is wrong!'});
@@ -57,8 +64,11 @@ router.post('/login',
 			res.json({status:'Error'});
 		}
 });
-router.get('/protected', (req, res, next)=>{
-
+router.get('/protected', verifyToken, (req, res, next)=>{
+	User.findOne({_id: mongoose.mongo.ObjectId(req.userId)}, (err, user)=>{
+		if(err || !user)  res.status(404).json({status: 'Error', error: 'Not found'});
+		else res.status(200).json({status: 'Success', data: user});
+	});
 });
 
 module.exports = router;
