@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../models/user');
-const { body, validationResult } = require('express-validator/check');
+const { body, query, validationResult } = require('express-validator/check');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { verifyToken } = require('../middlewares/auth');
@@ -64,7 +64,17 @@ router.post('/login',
 			res.json({status:'Error'});
 		}
 });
+router.get('/email', 
+		query(['email']).not().isEmpty().isString(),
+	(req, res, next)=>{
+	
+	User.findOne({email: req.query.email}, (err, user)=>{
+		if(user) return res.json({exist: true});
+		else res.json({exist: false});
+	});
+});
 router.get('/protected', verifyToken, (req, res, next)=>{
+	
 	User.findOne({_id: mongoose.mongo.ObjectId(req.userId)}, (err, user)=>{
 		if(err || !user)  res.status(404).json({status: 'Error', error: 'Not found'});
 		else res.status(200).json({status: 'Success', data: user});
